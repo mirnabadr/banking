@@ -42,7 +42,7 @@
 }
 
 .input-class {
-    @apply text-[16px] leading-[24px] placeholder:text-[16px] placeholder:leading-[24px] rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
+    @apply text-[14px] leading-[20px] placeholder:text-[14px] placeholder:leading-[20px] rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
   }
 
 .sheet-content button {
@@ -193,7 +193,8 @@
   }
 
 .profile-banner {
-    @apply h-[120px] w-full bg-cover bg-no-repeat;
+    @apply h-[120px] w-full bg-cover bg-no-repeat bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800;
+    background-image: url('/icons/gradient-mesh.svg');
   }
 
 .profile {
@@ -256,7 +257,7 @@
 
   /* Bank Card */
 .bank-card {
-    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white backdrop-blur-[6px];
+    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white backdrop-blur-[6px] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden;
   }
 
 .bank-card_content {
@@ -264,7 +265,7 @@
   }
 
 .bank-card_icon {
-    @apply flex size-full flex-1 flex-col items-end justify-between rounded-r-[20px] bg-cover bg-center bg-no-repeat py-5 pr-5;
+    @apply relative z-10 flex size-full flex-1 flex-col items-end justify-between rounded-r-[20px] py-5 pr-5;
   }
 
   /* Bank Info */
@@ -310,15 +311,15 @@
 
   /* Auth Form */
 .auth-form {
-    @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8;
+    @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-8 md:gap-6;
   }
 
 .form-item {
-    @apply flex flex-col gap-1.5;
+    @apply flex flex-col gap-2.5;
   }
 
 .form-label {
-    @apply text-[14px] leading-[20px] w-full max-w-[280px] font-medium text-gray-700;
+    @apply text-[12px] leading-[16px] w-full max-w-[280px] font-medium text-gray-700;
   }
 
 .form-message {
@@ -326,7 +327,7 @@
   }
 
 .form-btn {
-    @apply text-[16px] leading-[24px] rounded-lg border font-semibold text-white;
+    @apply text-[14px] leading-[20px] rounded-lg bg-blue-600 hover:bg-blue-700 font-semibold text-white px-4 py-2.5 w-full;
   }
 
 .form-link {
@@ -366,7 +367,7 @@
 
   /* Root Layout */
 .root-layout {
-    @apply flex h-16 items-center justify-between p-5 sm:p-8 md:hidden;
+    @apply flex h-16 items-center justify-between p-5 sm:p-8;
   }
 
   /* Bank Info */
@@ -409,7 +410,7 @@
   }
 
 .sidebar-logo {
-    @apply 2xl:text-[26px] 2xl:leading-[32px] text-[26px] font-bold max-xl:hidden;
+    @apply 2xl:text-[26px] 2xl:leading-[32px] text-[26px] font-bold text-gray-900;
     font-family: var(--font-ibm-plex-serif);
   }
 
@@ -418,5 +419,9 @@
   }
 
 .sidebar-label {
-    @apply text-[16px] leading-[24px] font-semibold max-xl:hidden;
+    @apply text-[16px] leading-[24px] font-semibold;
+  }
+
+.bg-bank-gradient {
+    @apply bg-gradient-to-r from-blue-600 to-blue-800;
   }
