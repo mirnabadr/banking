@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -14,7 +14,7 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
+  FormLabel, 
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -23,13 +23,29 @@ import { authFormSchema } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.action';
+import PlaidLink from './PlaidLink';
 
 
 const AuthForm = ({ type }: { type: string }) => {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
- 
+
+  // Check if user is already logged in when component mounts
+  useEffect(() => {
+    const checkLoggedInUser = async () => {
+      try {
+        const loggedInUser = await getLoggedInUser();
+        if (loggedInUser) {
+          setUser(loggedInUser);
+        }
+      } catch (error) {
+        console.error('Error checking logged in user:', error);
+      }
+    };
+    
+    checkLoggedInUser();
+  }, []);
 
   const formSchema = authFormSchema(type);
 
@@ -132,7 +148,7 @@ const AuthForm = ({ type }: { type: string }) => {
       </header>
       {user ? (
         <div className="flex flex-col gap-4">
-          <PlaidLink user={user} variant="primary" />
+          <PlaidLink user={user} variant="primary" />  
         </div>
       ): (
         <>

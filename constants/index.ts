@@ -51,7 +51,7 @@ export const ITEMS = [
 
 export const topCategoryStyles = {
   "Food and Drink": {
-    bg: "bg-blue-25",
+    bg: "bg-[#EFF8FF]",
     circleBg: "bg-blue-100",
     text: {
       main: "text-blue-900",
@@ -64,20 +64,20 @@ export const topCategoryStyles = {
     icon: "/icons/monitor.svg",
   },
   Travel: {
-    bg: "bg-success-25",
-    circleBg: "bg-success-100",
+    bg: "bg-[#ECFDF3]",
+    circleBg: "bg-green-100",
     text: {
-      main: "text-success-900",
-      count: "text-success-700",
+      main: "text-green-900",
+      count: "text-green-700",
     },
     progress: {
-      bg: "bg-success-100",
-      indicator: "bg-success-700",
+      bg: "bg-green-100",
+      indicator: "bg-green-700",
     },
     icon: "/icons/coins.svg",
   },
   default: {
-    bg: "bg-pink-25",
+    bg: "bg-[#FDF2F8]",
     circleBg: "bg-pink-100",
     text: {
       main: "text-pink-900",
@@ -98,6 +98,12 @@ export const transactionCategoryStyles = {
     textColor: "text-pink-700",
     chipBackgroundColor: "bg-inherit",
   },
+  Travel: {
+    borderColor: "border-blue-600",
+    backgroundColor: "bg-blue-500",
+    textColor: "text-blue-700",
+    chipBackgroundColor: "bg-inherit",
+  },
   Payment: {
     borderColor: "border-success-600",
     backgroundColor: "bg-green-600",
@@ -111,9 +117,27 @@ export const transactionCategoryStyles = {
     chipBackgroundColor: "bg-inherit",
   },
   Transfer: {
-    borderColor: "border-red-700",
-    backgroundColor: "bg-red-700",
-    textColor: "text-red-700",
+    borderColor: "border-orange-600",
+    backgroundColor: "bg-orange-500",
+    textColor: "text-orange-700",
+    chipBackgroundColor: "bg-inherit",
+  },
+  "General Merchandise": {
+    borderColor: "border-purple-600",
+    backgroundColor: "bg-purple-500",
+    textColor: "text-purple-700",
+    chipBackgroundColor: "bg-inherit",
+  },
+  "Gas Stations": {
+    borderColor: "border-yellow-600",
+    backgroundColor: "bg-yellow-500",
+    textColor: "text-yellow-700",
+    chipBackgroundColor: "bg-inherit",
+  },
+  "General Services": {
+    borderColor: "border-indigo-600",
+    backgroundColor: "bg-indigo-500",
+    textColor: "text-indigo-700",
     chipBackgroundColor: "bg-inherit",
   },
   Processing: {
@@ -128,10 +152,16 @@ export const transactionCategoryStyles = {
     textColor: "text-[#027A48]",
     chipBackgroundColor: "bg-[#ECFDF3]",
   },
+  Other: {
+    borderColor: "border-gray-400",
+    backgroundColor: "bg-gray-400",
+    textColor: "text-gray-700",
+    chipBackgroundColor: "bg-gray-100",
+  },
   default: {
-    borderColor: "",
-    backgroundColor: "bg-blue-500",
-    textColor: "text-blue-700",
-    chipBackgroundColor: "bg-inherit",
+    borderColor: "border-gray-400",
+    backgroundColor: "bg-gray-400",
+    textColor: "text-gray-700",
+    chipBackgroundColor: "bg-gray-100",
   },
 };

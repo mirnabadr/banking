@@ -3,9 +3,63 @@ import HeaderBox from '@/components/HeaderBox'
 import TotalBalancedBox from '@/components/TotalBalancedBox'
 import RightSidebar from '@/components/RightSidebar'
 import { getLoggedInUser } from '@/lib/actions/user.action'
+import { getAccount, getAccounts } from '@/lib/actions/bank.actions'
+import RecentTransactions from '@/components/RecentTransactions'
 
-const Home = async () => {
-  const loggedInUser = await getLoggedInUser();
+
+const Home = async ({ searchParams }: SearchParamProps) => {
+    const resolvedSearchParams = await searchParams;
+    const id = resolvedSearchParams?.id as string;
+    const page = resolvedSearchParams?.page as string;
+    const currentPage = Number(page) || 1;
+    
+    const loggedInUser = await getLoggedInUser();
+    
+    // Redirect to sign-in if user is not logged in
+    if (!loggedInUser || !loggedInUser.$id) {
+      return (
+        <section className="home">
+          <div className="home-content">
+            <header className="Home Header">
+              <HeaderBox  
+                type="greeting"
+                title="Welcome"
+                user="Guest"  
+                subtext="Please sign in to access your accounts."
+              />
+            </header>
+          </div>
+        </section>
+      );
+    }
+    
+    const accounts = await getAccounts({ 
+      userId: loggedInUser.$id 
+    })
+  
+    if(!accounts || !accounts.data || accounts.data.length === 0) {
+      return (
+        <section className="home">
+          <div className="home-content">
+            <header className="Home Header">
+              <HeaderBox  
+                type="greeting"
+                title="Welcome"
+                user={`${loggedInUser?.firstName || loggedInUser?.name || 'Guest'}`}  
+                subtext="Connect your bank account to get started."
+              />
+            </header>
+          </div>
+        </section>
+      );
+    }
+    
+    const accountsData = accounts.data;
+    const appwriteItemId = id || accountsData[0]?.appwriteItemId;
+  
+    const account = appwriteItemId ? await getAccount({ appwriteItemId }) : null;
+
+
   
   // Format user data to match User type
   const user: User = loggedInUser ? {
@@ -40,18 +94,26 @@ const Home = async () => {
            < HeaderBox  
             type="greeting"
             title="Welcome"
-            user={`${user?.firstName || user?.name || 'Guest'}`}  
+            user={`${loggedInUser?.firstName || loggedInUser?.name || 'Guest'}`}  
             subtext="Manage your accounts and transactions efficiently."
            />
            < TotalBalancedBox 
-            accounts={[]}
-            totalBanks={1}
-            totalCurrentBalance={1250.35}
+            accounts={accountsData}
+            totalBanks={accounts?.totalBanks}
+            totalCurrentBalance={accounts?.totalCurrentBalance}
+           
            />
         </header>
-        Recent Transactions
+        <RecentTransactions 
+        accounts={accountsData}
+        transactions={account?.transactions}
+        appwriteItemId={appwriteItemId}
+        page={currentPage}
+        />
       </div>
-       <RightSidebar user={user} transactions={[]} banks={[{currentBalance: 123.50}, {currentBalance: 500.50}]} />
+       <RightSidebar user={loggedInUser} 
+       transactions={account?.transactions} 
+       banks={accountsData?.slice(0, 2)} /> 
     </section>
   )
 }

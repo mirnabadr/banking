@@ -1,20 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
- import BankCard from './BankCard'
+import BankCard from './BankCard'
 import { countTransactionCategories } from '@/lib/utils'
-
+import Category from '@/components/Category'
 
 const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
   const categories: CategoryCount[] = countTransactionCategories(transactions);
-  
-  // Get display name - use name, or firstName + lastName, or email username, or 'Guest'
-  const displayName = user.name || 
-    (user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : '') ||
-    (user.firstName ? user.firstName : '') ||
-    (user.email ? user.email.split('@')[0] : 'Guest');
-  
-  const displayInitial = displayName.charAt(0).toUpperCase();
 
   return (
     <aside className="right-sidebar">
@@ -22,15 +14,15 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
         <div className="profile-banner" />
         <div className="profile">
           <div className="profile-img">
-            <span className="text-5xl font-bold text-blue-500">{displayInitial}</span>
+            <span className="text-5xl font-bold text-blue-500">{user.firstName[0]}</span>
           </div>
 
           <div className="profile-details">
             <h1 className='profile-name'>
-              {displayName}
+              {user.firstName} {user.lastName}
             </h1>
             <p className="profile-email">
-              {user.email || 'No email'}
+              {user.email}
             </p>
           </div>
         </div>
@@ -43,7 +35,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
             <Image 
                src="/icons/plus.svg"
               width={20}
-              height={20} 
+              height={20}
               alt="plus"
             />
             <h2 className="text-14 font-semibold text-gray-600">
@@ -58,7 +50,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
               <BankCard 
                 key={banks[0].$id}
                 account={banks[0]}
-                userName={displayName}
+                userName={`${user.firstName} ${user.lastName}`}
                 showBalance={false}
               />
             </div>
@@ -67,7 +59,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
                 <BankCard 
                   key={banks[1].$id}
                   account={banks[1]}
-                  userName={displayName}
+                  userName={`${user.firstName} ${user.lastName}`}
                   showBalance={false}
                 />
               </div>
@@ -75,12 +67,15 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
           </div>
         )}
 
-        {categories.length > 0 && (
-          <div className="mt-10 flex flex-1 flex-col gap-6">
-            <h2 className="header-2">Top categories</h2>
-            {/* TODO: Add Category component when available */}
+        <div className="mt-10 flex flex-1 flex-col gap-6">
+          <h2 className="header-2">Top categories</h2>
+
+          <div className='flex flex-col gap-3'>
+            {categories.map((category, index) => (
+               <Category key={category.name} category={category} /> 
+            ))}
           </div>
-        )}
+        </div>
       </section>
     </aside>
   )

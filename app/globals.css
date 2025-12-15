@@ -231,6 +231,46 @@
     @apply flex max-h-screen w-full flex-col gap-8 overflow-y-scroll p-8 xl:py-12;
   }
 
+  /* Transaction Table */
+.transactions table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+.transactions table thead tr {
+    border-bottom: 2px solid #d1d5db !important;
+  }
+
+.transactions table tbody tr {
+    border-bottom: 1px solid #d1d5db !important;
+  }
+
+.transactions table tbody tr:last-child {
+    border-bottom: 1px solid #d1d5db !important;
+  }
+
+.transactions table td,
+.transactions table th {
+    border-right: 0;
+    border-left: 0;
+    padding: 1.5rem 2rem !important;
+  }
+
+.transactions table thead th {
+    padding: 1.25rem 2rem !important;
+  }
+
+  /* Compact table variant for home dashboard */
+.recent-transactions table td,
+.recent-transactions table th {
+    padding: 0.75rem 1rem !important;
+  }
+
+.recent-transactions table thead th {
+    padding: 0.75rem 1rem !important;
+  }
+
 .transactions-header {
     @apply flex w-full flex-col items-start justify-between gap-8 md:flex-row;
   }
@@ -275,7 +315,7 @@
 
   /* Category Badge */
 .category-badge {
-    @apply flex items-center justify-center truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2;
+    @apply flex items-center justify-center truncate w-fit gap-1.5 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2 min-w-fit;
   }
 
 .banktab-item {
@@ -301,7 +341,11 @@
   }
 
 .plaidlink-default {
-    @apply flex !justify-start cursor-pointer gap-3 rounded-lg !bg-transparent flex-row;
+    @apply flex !justify-start cursor-pointer gap-3 rounded-lg !bg-transparent flex-row items-center;
+  }
+  
+.plaidlink-default p {
+    @apply text-gray-700 font-semibold;
   }
 
   /* Auth */
@@ -345,24 +389,40 @@
     display: none;
   }
 
+.payment-transfer form {
+    @apply space-y-0;
+  }
+
+.payment-transfer form > * {
+    @apply border-t border-gray-200;
+  }
+
+.payment-transfer form > *:first-child {
+    @apply border-t-0;
+  }
+
+.payment-transfer form > * + * {
+    @apply mt-0 pt-12;
+  }
+
 .payment-transfer_form-item {
-    @apply flex w-full max-w-[850px] flex-col gap-3 md:flex-row lg:gap-8;
+    @apply flex w-full max-w-[850px] flex-col gap-6 md:flex-row lg:gap-10;
   }
 
 .payment-transfer_form-content {
-    @apply flex w-full max-w-[280px] flex-col gap-2;
+    @apply flex w-full max-w-[280px] flex-col gap-4;
   }
 
 .payment-transfer_form-details {
-    @apply flex flex-col gap-1 border-t border-gray-200 pb-5 pt-6;
+    @apply flex flex-col gap-3 border-t border-gray-200 pb-6 pt-8;
   }
 
 .payment-transfer_btn-box {
-    @apply mt-5 flex w-full max-w-[850px] gap-3 border-gray-200 py-5;
+    @apply mt-8 flex w-full max-w-[850px] gap-3 border-t border-gray-200 pt-8 pb-6;
   }
 
 .payment-transfer_btn {
-    @apply !text-[14px] !leading-[20px] !w-full !font-semibold !text-white;
+    @apply !text-[16px] !leading-[24px] !w-full !font-semibold !text-white !bg-blue-600 hover:!bg-blue-700 !py-6 !rounded-lg transition-colors;
   }
 
   /* Root Layout */

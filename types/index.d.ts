@@ -60,7 +60,7 @@ declare type Account = {
   type: string;
   subtype: string;
   appwriteItemId: string;
-  sharableId: string;
+  shareableId: string;
 };
 
 declare type Transaction = {
@@ -87,9 +87,9 @@ declare type Bank = {
   accountId: string;
   bankId: string;
   accessToken: string;
-  fundingSourceUrl: string;
+  fundingSource: string;
   userId: string;
-  sharableId: string;
+  shareableId: string;
 };
 
 declare type AccountTypes =
@@ -242,6 +242,7 @@ declare interface CategoryBadgeProps {
 
 declare interface TransactionTableProps {
   transactions: Transaction[];
+  variant?: 'default' | 'compact';
 }
 
 declare interface CategoryProps {
@@ -271,13 +272,14 @@ declare interface getInstitutionProps {
 
 declare interface getTransactionsProps {
   accessToken: string;
+  accountId?: string; 
 }
 
 declare interface CreateFundingSourceOptions {
   customerId: string; // Dwolla Customer ID
   fundingSourceName: string; // Dwolla Funding Source Name
   plaidToken: string; // Plaid Account Processor Token
-  _links: object; // Dwolla On Demand Authorization Link
+  _links?: object; // Dwolla On Demand Authorization Link (optional)
 }
 
 declare interface CreateTransactionProps {
@@ -314,7 +316,7 @@ declare interface createBankAccountProps {
   accountId: string;
   bankId: string;
   fundingSourceUrl: string;
-  sharableId: string;
+  shareableId: string;
 }
 
 declare interface getBanksProps {

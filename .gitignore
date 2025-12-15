@@ -42,3 +42,18 @@ next-env.d.ts
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log

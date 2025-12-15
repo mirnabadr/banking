@@ -2,6 +2,7 @@ import { formatAmount } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Copy from './Copy' 
 
 
 const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) => {
@@ -58,6 +59,7 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
           className="absolute top-0 left-0 w-full h-full object-cover rounded-[20px] opacity-20"
         />
       </Link>
+      {showBalance && account?.shareableId && <Copy title={account.shareableId} />}
     </div>
   )
 }
