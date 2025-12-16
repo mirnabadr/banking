@@ -4,8 +4,24 @@ import { getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.action';  
 import React from 'react'
 
+export const dynamic = 'force-dynamic';
+
 const MyBanks = async () => {
   const loggedIn = await getLoggedInUser();
+  
+  if (!loggedIn || !loggedIn.$id) {
+    return (
+      <section className='flex'>
+        <div className="my-banks">
+          <HeaderBox 
+            title="My Bank Accounts"
+            subtext="Please sign in to view your bank accounts."
+          />
+        </div>
+      </section>
+    );
+  }
+  
   const accounts = await getAccounts({ 
     userId: loggedIn.$id 
   })

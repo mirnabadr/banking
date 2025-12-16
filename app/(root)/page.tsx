@@ -6,6 +6,7 @@ import { getLoggedInUser } from '@/lib/actions/user.action'
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions'
 import RecentTransactions from '@/components/RecentTransactions'
 
+export const dynamic = 'force-dynamic';
 
 const Home = async ({ searchParams }: SearchParamProps) => {
     const resolvedSearchParams = await searchParams;

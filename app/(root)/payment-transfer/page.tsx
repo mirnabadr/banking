@@ -4,8 +4,22 @@ import { getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.action';  
 import React from 'react'
 
+export const dynamic = 'force-dynamic';
+
 const Transfer = async () => {
   const loggedIn = await getLoggedInUser();
+  
+  if (!loggedIn || !loggedIn.$id) {
+    return (
+      <section className="payment-transfer">
+        <HeaderBox 
+          title="Payment Transfer"
+          subtext="Please sign in to make a payment transfer."
+        />
+      </section>
+    );
+  }
+  
   const accounts = await getAccounts({ 
     userId: loggedIn.$id 
   })

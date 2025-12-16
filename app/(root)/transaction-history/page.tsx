@@ -6,12 +6,28 @@ import { getLoggedInUser } from '@/lib/actions/user.action';
 import { formatAmount } from '@/lib/utils';
 import React from 'react'
 
+export const dynamic = 'force-dynamic';
+
 const TransactionHistory = async ({ searchParams }:SearchParamProps) => {
   const resolvedSearchParams = await searchParams;
   const id = resolvedSearchParams.id;
   const page = resolvedSearchParams.page;
   const currentPage = Number(page as string) || 1;
   const loggedIn = await getLoggedInUser();
+  
+  if (!loggedIn || !loggedIn.$id) {
+    return (
+      <div className="transactions">
+        <div className="transactions-header">
+          <HeaderBox 
+            title="Transaction History"
+            subtext="Please sign in to view your transaction history."
+          />
+        </div>
+      </div>
+    );
+  }
+  
   const accounts = await getAccounts({ 
     userId: loggedIn.$id 
   })
