@@ -25,8 +25,10 @@ export const createTransaction = async (transaction: CreateTransactionProps) => 
         const transferIdCheck = await database.listDocuments(
           DATABASE_ID!,
           TRANSACTION_COLLECTION_ID!,
-          [Query.equal('transferId', (transaction as any).transferId)],
-          1
+          [
+            Query.equal('transferId', (transaction as any).transferId),
+            Query.limit(1)
+          ]
         );
         
         if (transferIdCheck.total > 0) {
@@ -51,12 +53,12 @@ export const createTransaction = async (transaction: CreateTransactionProps) => 
       }
       
       queryFilters.push(Query.orderDesc('$createdAt'));
+      queryFilters.push(Query.limit(1)); // Limit to 1 result (most recent)
 
       existingTransactions = await database.listDocuments(
         DATABASE_ID!,
         TRANSACTION_COLLECTION_ID!,
-        queryFilters,
-        1 // Limit to 1 result (most recent)
+        queryFilters
       );
 
       if (existingTransactions.total > 0) {
